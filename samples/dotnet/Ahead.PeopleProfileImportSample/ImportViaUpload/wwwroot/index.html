@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ahead people profile import via javascript</title>
+    <script>
+        let jsonDocuments = 0;
+        function addDocument() {
+            jsonDocuments++;
+            const target = document.querySelector("#import")
+            const template = document.querySelector("#json");
+            const clone = template.content.cloneNode(true);
+            clone.querySelector("label").textContent = `json-${jsonDocuments}`;
+            clone.querySelector("label").setAttribute("for", `json-${jsonDocuments}`);
+            clone.querySelector("textarea").setAttribute("id", `json-${jsonDocuments}`);
+            target.appendChild(clone);
+        }
+
+        async function send() {
+            const fd = new FormData(); 
+            Array
+                .from(document.querySelector("#import").querySelectorAll("textarea"))
+                .map(area => new Blob([area.value], { type: "application/json"}))
+                .forEach((blob, index) => fd.append(`part ${index}`, blob));
+
+            const response = await fetch('/api/import', {
+                method: 'POST',
+                body: fd
+            });
+
+            if (response.ok) {
+                console.log('File uploaded successfully');
+            } else {
+                console.log('Upload failed with status: ' + response.status);
+            }
+        }
+    </script>
+</head>
+<body>
+  <template id="json">
+      <label for="json-x">json-x</label>
+      <textarea id="json-x">{}</textarea>
+  </template>
+  <h1>Ahead people profile import via javascript</h1>
+  <button onclick="send()">Send the documents</button>
+  <button onclick="addDocument()">Add a json document</button>
+  <div id="import"></div>
+</body>
+</html>
