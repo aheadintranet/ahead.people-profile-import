@@ -3,24 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Ahead people profile import via javascript</title>
+    <style>
+        body {
+            padding: 1rem;
+        }
+
+        #commands {
+            margin-bottom: 1rem;
+        }
+
+        #import {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 10px;
+        }
+
+        .input-block {
+            display: flex;
+            flex-flow: column;
+        }
+    </style>
     <script>
         let jsonDocuments = 0;
+        let files = 0;
+
         function addDocument() {
-            jsonDocuments++;
+            const text = `json-${++jsonDocuments}`;
             const target = document.querySelector("#import")
             const template = document.querySelector("#json");
             const clone = template.content.cloneNode(true);
-            clone.querySelector("label").textContent = `json-${jsonDocuments}`;
-            clone.querySelector("label").setAttribute("for", `json-${jsonDocuments}`);
-            clone.querySelector("textarea").setAttribute("id", `json-${jsonDocuments}`);
+            clone.querySelector("label").textContent = text;
+            clone.querySelector("label").setAttribute("for", text);
+            clone.querySelector("textarea").setAttribute("id", text);
+            target.appendChild(clone);
+        }
+
+        function addFile() {
+            const text = `file-${++files}`;
+            const text2 = `filename-${files}`;
+            const target = document.querySelector("#import")
+            const template = document.querySelector("#file");
+            const clone = template.content.cloneNode(true);
+            
+            clone.querySelector("label[for^=file]").textContent = text;
+            clone.querySelector("label[for^=file]").setAttribute("for", text);
+            clone.querySelector("input[type=file]").setAttribute("id", text);
+            
+            clone.querySelector("label[for^=name]").textContent = text2;
+            clone.querySelector("label[for^=name]").setAttribute("for", text2);
+            clone.querySelector("input[type=text]").setAttribute("id", text2);
+            
             target.appendChild(clone);
         }
 
         async function send() {
-            const fd = new FormData(); 
+            const fd = new FormData();
             Array
                 .from(document.querySelector("#import").querySelectorAll("textarea"))
-                .map(area => new Blob([area.value], { type: "application/json"}))
+                .map(area => new Blob([area.value], {type: "application/json"}))
                 .forEach((blob, index) => fd.append(`part ${index}`, blob));
 
             const response = await fetch('/api/import', {
@@ -37,13 +77,26 @@
     </script>
 </head>
 <body>
-  <template id="json">
-      <label for="json-x">json-x</label>
-      <textarea id="json-x">{}</textarea>
-  </template>
-  <h1>Ahead people profile import via javascript</h1>
-  <button onclick="send()">Send the documents</button>
-  <button onclick="addDocument()">Add a json document</button>
-  <div id="import"></div>
+<template id="json">
+    <div class="input-block">
+        <label for="json-x">json-x</label>
+        <textarea id="json-x" rows="5">{}</textarea>
+    </div>
+</template>
+<template id="file">
+    <div class="input-block">
+        <label for="file-x">file-x</label>
+        <input id="file-x" type="file">
+        <label for="name-x">file-x</label>
+        <input id="name-x" type="text" placeholder="employeeId__filePath">
+    </div>
+</template>
+<h1>Ahead people profile import via javascript</h1>
+<div id="commands">
+    <button onclick="addDocument()">Add a json document</button>
+    <button onclick="addFile()">Add a file</button>
+    <button onclick="send()">Send the documents</button>
+</div>
+<div id="import"></div>
 </body>
 </html>
