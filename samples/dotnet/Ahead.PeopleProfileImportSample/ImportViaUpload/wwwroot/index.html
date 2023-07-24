@@ -44,24 +44,32 @@
             const target = document.querySelector("#import")
             const template = document.querySelector("#file");
             const clone = template.content.cloneNode(true);
-            
+
             clone.querySelector("label[for^=file]").textContent = text;
             clone.querySelector("label[for^=file]").setAttribute("for", text);
             clone.querySelector("input[type=file]").setAttribute("id", text);
-            
+
             clone.querySelector("label[for^=name]").textContent = text2;
             clone.querySelector("label[for^=name]").setAttribute("for", text2);
             clone.querySelector("input[type=text]").setAttribute("id", text2);
-            
+
             target.appendChild(clone);
         }
 
         async function send() {
             const fd = new FormData();
             Array
-                .from(document.querySelector("#import").querySelectorAll("textarea"))
-                .map(area => new Blob([area.value], {type: "application/json"}))
-                .forEach((blob, index) => fd.append(`part ${index}`, blob));
+                .from(document.querySelector("#import").querySelectorAll("div.input-block")).map((inputBlock, index) => {
+                if (inputBlock.querySelector("textarea")) {
+                    // we're dealing with a json file
+                    return (fd) => fd.append(`part ${index}`, new Blob([inputBlock.querySelector("textarea").value], {type: "application/json"}))
+                } else if (inputBlock.querySelector("input[type=file]")) {
+                    // we're dealing with a file
+                    return (fd) => fd.append(`part ${index}`,
+                        new File([inputBlock.querySelector("input[type=file]").value], inputBlock.querySelector("input[type=text]").value))
+                }
+            })
+            .forEach(action => action(fd));
 
             const response = await fetch('/api/import', {
                 method: 'POST',
@@ -88,7 +96,7 @@
         <label for="file-x">file-x</label>
         <input id="file-x" type="file">
         <label for="name-x">file-x</label>
-        <input id="name-x" type="text" placeholder="employeeId__filePath">
+        <input id="name-x" placeholder="employeeId__filePath" type="text">
     </div>
 </template>
 <h1>Ahead people profile import via javascript</h1>
