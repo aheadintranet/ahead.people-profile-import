@@ -5,5 +5,6 @@ import request that is compatible with ahead's people import API. The server par
 some basic validation around whether the sent json document(s) contain an employeeId. 
 
 ![Alt text](docs/screenshot.png "Screenshot of the HTML page in action")
+![Alt text](docs/screenshot2.png "Corresponding server log")
 
 The special property "file" will be treated as an expected file that should follow the preceding JSON document. The server will do nothing but output some key data around your request.
