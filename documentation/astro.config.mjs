@@ -5,17 +5,20 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Profile Import documentation',
+			logo: {
+				light: '/src/assets/ahead--light.png',
+				dark: '/src/assets/ahead--dark.png',
+			},
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				linkedin: 'https://www.linkedin.com/company/aheadintranet/',
+				github: 'https://github.com/aheadintranet/ahead.people-profile-import',
+				email: 'mailto:support@aheadintranet.com',
 			},
 			sidebar: [
 				{
 					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
+					autogenerate: { directory: 'guides' },
 				},
 				{
 					label: 'Reference',
