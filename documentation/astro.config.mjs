@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'Profile Import documentation',
+			title: 'Profile Import docs',
 			logo: {
 				light: '/src/assets/ahead--light.png',
 				dark: '/src/assets/ahead--dark.png',
