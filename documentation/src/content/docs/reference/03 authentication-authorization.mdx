@@ -3,6 +3,7 @@ title: Authentication & Authorization
 description: Describes how to authorize calls against the People Import API
 tableOfContents: false
 ---
+import { LinkCard } from '@astrojs/starlight/components';
 
 Authentication & Authorization is done by generating an **API-Key** through ahead’s administration settings. 
 There it is possible to:
@@ -15,3 +16,9 @@ If you suspect that the key has been compromised, use the ahead administration i
 :::
 
 When calling the API, you need to provide the API-Key as copied out from ahead as value to the custom “x-functions-key” HTTP-Header.
+
+<LinkCard
+    title="Getting the API-Key"
+    description="The guide on using Postman to perform updates also describes how to get the API-Key"
+    href="../../guides/01-get-apikey-and-use-postman/"
+/>

@@ -9,8 +9,8 @@ A person update JSON object may appear as
 * as element of a JSON array within the body of a request whose content-type is application/json.
 
 Each JSON object must contain one of 
-•	the **“employeeId”** field. This field needs to correlate with a person’s “employeeId” value as stored in MS Entra.
-•	the **“userPrincipalName”** (UPN). This field needs to correlate with a person’s user principal name in MS Entra.
+* the **“employeeId”** field. This field needs to correlate with a person’s “employeeId” value as stored in MS Entra.
+* the **“userPrincipalName”** (UPN). This field needs to correlate with a person’s user principal name in MS Entra.
 
 Given that the following field has been defined in the people profile definition:
 
@@ -27,7 +27,7 @@ Then the following update JSON would update the user with the UPN `joe@company.c
 ```json
 {
     "userPrincipalName": "joe@company.com",
-    "birthDay": "1985-10-03",
+    "birthDate": "1985-10-03",
 }
 ```
 
@@ -36,7 +36,7 @@ Sending a null for a supported field effectively deletes the value
 ```json
 {
     "userPrincipalName": "joe@company.com",
-    "birthDay": null,
+    "birthDate": null,
 }
 ```
 

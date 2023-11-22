@@ -17,9 +17,9 @@ The **people profile definition** (PPD) is a JSON document that will be prepared
 Describes which fields are supported in a user profile, of what type they are (e.g. a list, or a date), in what way they can be added and how they are used in ahead.
 :::
 
-The **ahead people store** (APS) is our database that is regularly synchronized with the customer’s AAD and provides the basis to merge any additional fields into the profile of a person.
+The **ahead people store** (APS) is our database that is regularly synchronized with your MS Entra tenant and provides the basis to merge any additional fields into the profile of a person.
 
-## Microsoft Entra (a.k.a. Azure Active Directory)
+## Microsoft Entra (previously Azure Active Directory)
 
 ahead's default values come from Microsoft Entra. Once ahead has been consented to be used with your tenant, it prepares the APS and creates user profiles from those people found in MS Entra.
 
@@ -44,6 +44,11 @@ Most of the documentation here deals with how to use the import API. Based on th
 
 Fields marked as having the source **User** can be entered by the user. The first time a user logs into ahead they will get a notification inviting them to fill our any empty user fields.
 
+:::caution
+A manual user field cannot be updated via the API.
+:::
+
 :::tip
-User fields are never mandatory. If you need certain fields to always be filled in, consider adding them via our API.
+User fields are never mandatory. 
+If you need certain fields to always be filled in, they need to be sourced as "API".
 :::
