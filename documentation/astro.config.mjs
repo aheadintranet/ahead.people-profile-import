@@ -6,7 +6,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Profile Import docs',
-			favicon: '/src/assets/images/ahead_a.svg',
+			favicon: '/src/assets/ahead_a.svg',
 			logo: {
 				light: '/src/assets/ahead--light.png',
 				dark: '/src/assets/ahead--dark.png',
