@@ -4,15 +4,21 @@ description: How to reach the endpoint and basic settings around the HTTP Header
 ---
 import { Card, LinkCard } from '@astrojs/starlight/components';
 
-<Card title="The API URL of the import is">
-  <h4>https://connect.aheadintranet.com/api/PeopleImport</h4>
-</Card>
+:::note
+<h4>The API URL of the import is</h4>
+<h5>https://connect.aheadintranet.com/api/PeopleImport</h5>
+:::
 
-and accepts PUTs With the following headers:
+It accepts **PUT**s With the following headers.
 
 ## x-functions-key
 
 The API-Key necessary to authorize the request
+
+<LinkCard
+  title="Authentication & Authorization"
+  href="../03-authentication-authorization/"
+/>
 
 ## Content-Type
 
