@@ -1,0 +1,43 @@
+---
+title: Endpoint
+description: How to reach the endpoint and basic settings around the HTTP Headers
+---
+import { Card, LinkCard } from '@astrojs/starlight/components';
+
+<Card title="The API URL of the import is">
+  <h4>https://connect.aheadintranet.com/api/PeopleImport</h4>
+</Card>
+
+and accepts PUTs With the following headers:
+
+## x-functions-key
+
+The API-Key necessary to authorize the request
+
+## Content-Type
+
+Supported are
+
+* multipart/form-data
+* application/json
+
+### multipart/form-data
+
+:::tip
+The structure of a multipart/form-data request is formally described at https://www.rfc-editor.org/rfc/rfc2388. It forms the basis of e.g., file uploads from HTML form submissions.
+:::
+
+Each part of a multipart request also defines its own content-type. Currently supported are
+
+* application/json - An update of a profile in the form of a **Person update JSON object**.
+* application/pdf - A *.pdf document for upload to the personal section of a user
+
+<LinkCard
+  title="Person update JSON object"
+  description="Learn about the specifics of the person update JSON"
+  href="../05-person-json-object/"
+/>
+
+### application/json
+
+Send a JSON array of **person update JSON objects**.
