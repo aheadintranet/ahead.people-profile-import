@@ -12,6 +12,12 @@ Provided you use ahead also for files to be shown to users in their personal sec
 here you will learn how to do a file upload for a user with postman. This guide assumes that
 you already had a look at [how to get an api-key and use postman to upload a profile update](../01-get-apikey-and-use-postman/).
 
+:::caution
+When testing, bear in mind that you are testing against the _real API_. We recommend that you perform your
+initial tests with a test account created in MS Entra for this purpose, which you can delete after you have verified
+that everything works satisfactorily.
+:::
+
 ## Choose the correct content-type
 
 File uploads need to happen with the `Content-Type` set to `multipart/form-data`.
