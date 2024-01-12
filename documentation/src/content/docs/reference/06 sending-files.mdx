@@ -32,6 +32,17 @@ joe@company.com__salary__March 2023.pdf
 
 It would upload a new file named **March 2023.pdf** under the **salary** category for the user with the UPN joe@company.com
 
+:::tip
+When you upload the **same** file again (i,e, with the same combination of **field name** and **file name**), the current file will be replaced
+much like on a file system with automatic overwrite. In the import logs you will see the difference by finding any of such entries:
+
+```text
+Success - FileUploaded - Uploaded file 'salary/March 2023.pdf' for 'joe@company.com'
+...
+Success - FileUploaded - Replaced file 'salary/March 2023.pdf' for 'joe@company.com'
+```
+:::
+
 You can send up to **50 files** per multipart request.
 
 :::danger
